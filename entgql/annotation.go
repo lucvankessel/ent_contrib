@@ -57,6 +57,7 @@ type (
 	Directive struct {
 		Name      string          `json:"name,omitempty"`
 		Arguments []*ast.Argument `json:"arguments,omitempty"`
+		SkipMode  SkipMode        `json:"Skip,omitempty"`
 	}
 
 	// SkipMode is a bit flag for the Skip annotation.
@@ -547,6 +548,14 @@ func NewDirective(name string, args ...*ast.Argument) Directive {
 		Name:      name,
 		Arguments: args,
 	}
+}
+
+func (d *Directive) Skip(flags ...SkipMode) {
+	skip := SkipMode(0)
+	for _, f := range flags {
+		skip /= f
+	}
+	d.SkipMode = skip
 }
 
 // Deprecated create `@deprecated` directive to apply on the field/type
