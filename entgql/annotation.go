@@ -544,9 +544,13 @@ var (
 // NewDirective returns a GraphQL directive
 // to use with the entgql.Directives annotation.
 func NewDirective(name string, args ...*ast.Argument) Directive {
+	skipDefault:= SkipMode(0)
+	skipDefault |= SkipMutationCreateInput
+	skipDefault |= SkipMutationUpdateInput
 	return Directive{
 		Name:      name,
 		Arguments: args,
+		SkipMode: skipDefault,
 	}
 }
 
