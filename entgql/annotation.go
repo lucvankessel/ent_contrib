@@ -53,6 +53,9 @@ type (
 		MutationInputs []MutationConfig `json:"MutationInputs,omitempty"`
 	}
 
+// I think the best way to solve the mr suggestions is to add a string array to the annotation called DirectivesOnTypes and DirectivesOnInputs
+// Then check when building the directives if the name of the type/input is in one of those 2 lists.
+
 	// Directive to apply on the field/type.
 	Directive struct {
 		Name      string          `json:"name,omitempty"`
